@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <title>收藏排行榜</title>
+        <link rel="stylesheet" type="text/css" href="css/common.css">
+        <link rel="stylesheet" type="text/css" href="css/ranking-list.css">
+        <script src="js/jquery-3.3.1.js"></script>
+        <script>
+            $(function () {
+                $.post("route/findHot",{},function (routes) {
+                    var uls_hot='<li>\n' +
+        '                        <span class="num one">1</span>\n' +
+        '                        <a href="route_detail.html?rid='+routes[0].rid+'"><img src="'+routes[0].rimage+'" ></a>\n' +
+        '                        <h4><a href="route_detail.html?rid='+routes[0].rid+'">'+routes[0].rname+'</a></h4>\n' +
+        '                        <p>\n' +
+        '                            <b class="price">&yen;<span>'+routes[0].price+'</span>起</b>\n' +
+        '                            <span class="shouchang">已收藏'+routes[0].count+'次</span>\n' +
+        '                        </p>\n' +
+        '                    </li>\n' +
+        '                    <li>\n' +
+        '                        <span class="num two">2</span>\n' +
+        '                        <a href="route_detail.html?rid='+routes[1].rid+'"><img src="'+routes[1].rimage+'" ></a>\n' +
+        '                        <h4><a href="route_detail.html?rid='+routes[1].rid+'">'+routes[1].rname+'</a></h4>\n' +
+        '                        <p>\n' +
+        '                            <b class="price">&yen;<span>'+routes[1].price+'</span>起</b>\n' +
+        '                            <span class="shouchang">已收藏'+routes[1].count+'次</span>\n' +
+        '                        </p>\n' +
+        '                    </li>';
+                    for (i=2;i<routes.length;i++) {
+                        uls_hot += '<li>\n' +
+                '                        <span class="num two">'+(i+1)+'</span>\n' +
+                '                        <a href="route_detail.html?rid='+routes[i].rid+'"><img src="'+routes[i].rimage+'" ></a>\n' +
+                '                        <h4><a href="route_detail.html?rid='+routes[i].rid+'">'+routes[i].rname+'</a></h4>\n' +
+                '                        <p>\n' +
+                '                            <b class="price">&yen;<span>'+routes[i].price+'</span>起</b>\n' +
+                '                            <span class="shouchang">已收藏'+routes[i].count+'次</span>\n' +
+                '                        </p>\n' +
+            '                     </li>'
+                    }
+                    $("#hot_ul").html(uls_hot)
+                });
+            });
+        </script>
+    </head>
+    <body>
+    <!--引入头部-->
+    <div id="header"></div>
+        <div class="contant">
+            <div class="shaixuan">
+                <span>线路名称</span>
+                <input type="text">
+                <span>金额</span>
+                <input type="text">~<input type="text">
+                <button>搜索</button>
+            </div>
+            <div class="list clearfix">
+                <ul id="hot_ul">
+
+
+                </ul>
+            </div>
+        </div>
+    	
+         <!--导入底部-->
+   		 <div id="footer"></div>
+    <!--导入布局js，共享header和footer-->
+    <script type="text/javascript" src="js/include.js"></script>
+    </body>
+</html>
